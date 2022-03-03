@@ -7,7 +7,7 @@ import json
 class ActorSpider(scrapy.Spider):
     def generate_start_urls():
         path = pathlib.Path(__file__).parent
-        filepath = (path / "../../data/json/acts.json").resolve()
+        filepath = (path / "../../acts.json").resolve()
         output = []
 
         with open(filepath) as json_file:
@@ -26,7 +26,7 @@ class ActorSpider(scrapy.Spider):
     # return (scrapy.Request(url=f"https://www.imdb.com{url}?ref_=nmls_hd", callback=self.parse_director_page) for url in response.css(".lister-list .lister-item-header a").xpath("@href").extract())
 
     def parse(self, response):
-        actor_id: str = response.url.rsplit("/", 2)[-2]
+        actor_id: str = response.url.rsplit("/", 2)[-2][0:9]
         name: str = response.css(
             "td.name-overview-widget__section span::text").extract_first()
 
@@ -50,11 +50,11 @@ class ActorSpider(scrapy.Spider):
             "#name-job-categories a").xpath("@href").extract()]
 
         if "#actor" in gender:
-            gender = 0
+            gender = "0"
         elif "#actress" in gender:
-            gender = 1
+            gender = "1"
         else:
-            gender = None
+            gender = "null"
 
         birth_place_info: str = response.css(
             "#name-born-info a:nth-child(3)::text").extract_first()
@@ -74,7 +74,7 @@ class ActorSpider(scrapy.Spider):
             "aid": actor_id,
             "fname": name[0],
             "lname": name[1] if len(name) > 1 else " ",
-            "birth_date": birth_date_obj.strftime("%m/%d/%Y") if birth_date_obj is not None else "none",
+            "birth_date": birth_date_obj.strftime("%Y-%m-%d") if birth_date_obj is not None else "none",
             "birth_country": birth_country,
             "birth_city": birth_city,
             "overall_rating": 0,
