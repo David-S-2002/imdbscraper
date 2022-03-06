@@ -1,0 +1,56 @@
+<!-- db.html
+     Use a form to collect a query against the sailor database.
+     Call the PHP script, db.php to perform
+     the given query and display the results
+
+     If you find a CSS file online, you can put the link there, in the place of
+     "style.css"
+
+     Below is copy mode, since it's outside the PHP tag. 
+    -->
+<html>
+<head><title> Access to the movie database </title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+<p>
+Welcome to our movie database!
+<br />
+
+<p> Provide a table name, key attribute and key value for search. </p> 
+
+<p> Possible table names: User, Movie, Actor, Director, CommentActor, CommentDirector, CommentMovie, Directs,
+Casts. </p> 
+
+
+<!-- The form that displays the information for the requested number of actors. -->
+<form name = "displayActors" action = "http://css1.seattleu.edu/~dstanko/dbtest/PDA6_db1.php" method = "post">  
+    How many actors do you want to display?: <input type = "text" name = "actors" /> <br />
+    <input type = "reset"  value = "Reset" />
+    <input type = "submit"  value = "Submit request" />
+</form>    
+
+<br />
+<p> Display movie information: </p>
+
+
+<form name = "displayMovies" action = "http://css1.seattleu.edu/~dstanko/dbtest/PDA6_db2.php" method = "post">  
+    How many movies do you want to display?: <input type = "text" name = "mpaa" value = "PG-13"> PG-13 <br />
+    <input type = "reset"  value = "Reset" /> 
+    <input type = "submit"  value = "Submit request" /> 
+</form>   
+
+<br />
+<p> Please write a query (This is a testing purpose. Do not use this functionality for PDA6) </p>
+
+<!-- You should replace the URL to PHP script in action with yours -->
+<form name = "f3" action = "http://css1.seattleu.edu/~dstanko/dbtest/db3.php" method = "post">
+	<textarea rows = "5" cols = "40" name = "query"></textarea>
+	<br />
+	<input type ="reset" value = "Reset" />
+	<input type = "submit" value = "Submit request" /> 
+</form>
+
+</body>
+</html>
+
